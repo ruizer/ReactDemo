@@ -2,12 +2,14 @@
 import "./App.css";
 import HelloWorld from "./HelloWorld";
 import MenuList from "./menu-list";
+import AnimationDemo from "./animation-demo";
 
 function App() {
   return (
     <div className="App">
       <HelloWorld />
       <MenuList />
+      <AnimationDemo />
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
