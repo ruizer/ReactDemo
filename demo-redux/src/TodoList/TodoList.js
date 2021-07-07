@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+// import React, { Component } from "react";
+import React from "react";
 // import PropTypes from 'prop-types'
 
 import "antd/dist/antd.css";
@@ -12,53 +13,92 @@ import {
 
 import { connect } from "react-redux";
 
-export class TodoList extends Component {
-  // static propTypes = {
+// export class TodoList extends Component {
+//   // static propTypes = {
 
-  // }
-  constructor(props) {
-    super(props);
+//   // }
+//   constructor(props) {
+//     super(props);
 
-    this.state = {};
-  }
+//     this.state = {};
+//   }
 
-  render() {
-    const {
-      inputValue,
-      list,
-      changeInputValue,
-      addItemAction,
-      deleteItemAction,
-    } = this.props;
+//   render() {
+//     const {
+//       inputValue,
+//       list,
+//       changeInputValue,
+//       addItemAction,
+//       deleteItemAction,
+//     } = this.props;
 
-    return (
-      <div style={{ margin: "10px" }}>
-        <div>
-          <Input
-            placeholder="Write Something"
-            value={inputValue}
-            style={{ width: "250px", marginRight: "10px" }}
-            onChange={changeInputValue}
-          />
-          <Button type="primary" onClick={addItemAction}>
-            增加
-          </Button>
-        </div>
-        <div style={{ margin: "10px", width: "300px" }}>
-          <List
-            bordered
-            dataSource={list}
-            renderItem={(item, i) => (
-              <List.Item onClick={deleteItemAction.bind(this, i)}>
-                {item}
-              </List.Item>
-            )}
-          />
-        </div>
+//     return (
+//       <div style={{ margin: "10px" }}>
+//         <div>
+//           <Input
+//             placeholder="Write Something"
+//             value={inputValue}
+//             style={{ width: "250px", marginRight: "10px" }}
+//             onChange={changeInputValue}
+//           />
+//           <Button type="primary" onClick={addItemAction}>
+//             增加
+//           </Button>
+//         </div>
+//         <div style={{ margin: "10px", width: "300px" }}>
+//           <List
+//             bordered
+//             dataSource={list}
+//             renderItem={(item, i) => (
+//               <List.Item onClick={deleteItemAction.bind(this, i)}>
+//                 {item}
+//               </List.Item>
+//             )}
+//           />
+//         </div>
+//       </div>
+//     );
+//   }
+// }
+
+
+// 无状态组件
+const TodoList = (props) => {
+  const {
+    inputValue,
+    list,
+    changeInputValue,
+    addItemAction,
+    deleteItemAction,
+  } = props;
+
+  return (
+    <div style={{ margin: "10px" }}>
+      <div>
+        <Input
+          placeholder="Write Something"
+          value={inputValue}
+          style={{ width: "250px", marginRight: "10px" }}
+          onChange={changeInputValue}
+        />
+        <Button type="primary" onClick={addItemAction}>
+          增加
+        </Button>
       </div>
-    );
-  }
-}
+      <div style={{ margin: "10px", width: "300px" }}>
+        <List
+          bordered
+          dataSource={list}
+          renderItem={(item, i) => (
+            <List.Item onClick={deleteItemAction.bind(this, i)}>
+              {item}
+            </List.Item>
+          )}
+        />
+      </div>
+    </div>
+  );
+};
 
 // Map Redux state to component props
 function mapStateToProps(state) {
@@ -73,7 +113,11 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     changeInputValue: (e) => dispatch(changeInputAction(e.target.value)),
-    addItemAction: () => dispatch(addItemAction()),
+    addItemAction: () => {
+      setTimeout(() => {
+        dispatch(addItemAction())
+      }, 100)
+    },
     deleteItemAction: (i) => dispatch(deleteItemAction(i)),
   };
 }
